@@ -3,24 +3,29 @@
 namespace App\DataFixtures;
 
 use App\Entity\Event;
+use DateTime;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Validator\Constraints\Date;
+use Faker\Factory;
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {   
+        $faker = Factory::create('fr_FR');
 
-        for($i = 0; $i<5; $i++){
+        for($i = 1; $i<=15; $i++){
             $date = new DateTimeImmutable();
+            $newDate = $date->modify('-'.rand(1, 100).'day');
+            $startDate = $newDate->modify('+'.rand(1, 200).'day');
+            $endDate = $startDate->modify('+1day');
             $event = new Event();
-            $event->setName("Test");
-            $event->setPrice("4000");
-            $event->setCreatedAt($date);
-            $event->setStartEvent($date);
-            $event->setEndEvent($date);
+            $event->setName('Concert '.$i);
+            $event->setPrice(rand(1000, 5000));
+            $event->setCreatedAt($newDate);
+            $event->setStartEvent($startDate);
+            $event->setEndEvent($endDate);
             $manager->persist($event);
         }
         $manager->flush();
