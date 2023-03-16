@@ -35,6 +35,7 @@ class EventController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $this->entityManager->persist($event);
             $this->entityManager->flush();
+            $this->addFlash('success','Votre événement à été créer, merci!');
 
             return $this->redirectToRoute('app_home');
         }
@@ -47,7 +48,6 @@ class EventController extends AbstractController
     #[Route('/event', name: 'app_event')]
     public function listEvent(): Response
     {   
-        $date = date('now');
         return $this->render('event/index.html.twig', [
             'events' => $this->repository->findAll(),
             'nbevent' => $this->repository->findAllToCome()

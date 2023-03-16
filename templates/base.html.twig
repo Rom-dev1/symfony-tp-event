@@ -12,6 +12,7 @@
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            <script src="{{asset('build/app.js')}}" defer></script>
         {% endblock %}
     </head>
     <body>
@@ -40,6 +41,13 @@
                 <button type="submit" class="text-white bg-gray-600 rounded-r p-4 hover:bg-gray-700">Rechercher</button>
             </div>
         </form>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div id="flash-messages" class="bg-slate-200 rounded w-1/4 mx-auto text-center p-6 mb-[100px]">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         <div class="w-4/5 mx-auto">
             {% block body %}{% endblock %}
         </div>
