@@ -26,18 +26,19 @@ class GoEventController extends AbstractController
                 $entityManager->flush();
                 $this->addFlash('sucess', 'Votre mail à bien été envoyé');
                 $email = (new Email())
-                ->from('hello@example.com')
-                ->to('you@example.com')
+                ->from($contact->getEmail()) // récupère le mail de l'emmeteur
+                ->to('you@example.com');
                 //->cc('cc@example.com')
                 //->bcc('bcc@example.com')
                 //->replyTo('fabien@example.com')
                 //->priority(Email::PRIORITY_HIGH)
-                ->subject('Time for Symfony Mailer!')
-                ->text('Sending emails is fun again!')
-                ->html('<p>See Twig integration for better HTML integration!</p>');
+                // ->subject('Time for Symfony Mailer!')
+                // ->text('Sending emails is fun again!')
+                // ->html('<p>See Twig integration for better HTML integration!</p>');
                 dump($email);
-            $mailer->send($email);
-            dump($mailer);
+                $mailer->send($email);
+                dump($mailer);
+                return $this->redirectToRoute('app_event');
             }
 
         return $this->render('go_event/email.html.twig', [
