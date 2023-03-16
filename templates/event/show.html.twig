@@ -1,5 +1,19 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>{{event.name}}</h1>
+<div class="w-1/2 mx-auto space-y-4 p-4 border-4 shadow-xl">
+    <div>
+        <h1 class="text-3xl">{{event.name}}</h1>
+        <p>{{event.description}}</p>
+    </div>
+    <div>
+        <p>Cet événenemt débute le {{event.startEvent | date('d-m-Y')}} à {{event.startEvent | date('H:i')}}</p>
+    </div>
+    <div class="flex items-center space-x-4">
+        <p>Alors si t'es motivé, clique!</p>
+        <a class="bg-gray-600 rounded p-3 text-white hover:bg-gray-700" href="{{path('app_go_event')}}">Rejoindre l'évenement</a>
+    </div>
+</div>
+    
+    
 {% endblock %}
