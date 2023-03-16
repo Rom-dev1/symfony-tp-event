@@ -4,7 +4,30 @@
 
 {% block body %}
 {% for event in events %}
-    <h1>{{event.name}}</h1>
+    <div>
+        <h1>{{event.name}}</h1>
+        <p>{{event.description}}</p>
+        <p>
+            {{event.startEvent | date("d/m/Y")}} à {{event.startEvent | date("H")}}h{{event.startEvent | date("i")}} au {{event.endEvent | date("d/m/Y")}} à {{event.endEvent | date("H")}}h{{event.endEvent | date("i")}}
+        </p>
+
+    </div>
+    <div>
+        <button>Voir</button>
+        {% if event.startEvent < date('now') %}
+            <span>Passé</span>
+        {% endif %}
+        {% if event.startEvent == date('now') %}
+            <span>En cours</span>
+        {% endif %}
+        {% if event.startEvent > date('now') %}
+            <span>A venir</span>
+        {% endif %}
+        
+        
+    </div>
+    
+
 {% endfor %}
 
 {% endblock %}
