@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,25 +17,29 @@ class Event
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank, Assert\Length(min:2)]
+    #[Assert\NotBlank]
     private ?string $name = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $price = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank, Assert\GreaterThan('now')]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank, Assert\GreaterThan('+1day')]
     private ?\DateTimeImmutable $startEvent = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank, Assert\GreaterThan('+2days')]
     private ?\DateTimeImmutable $endEvent = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $cover = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank , Assert\Length(min:2)]
     private ?string $description = null;
 
     public function getId(): ?int
