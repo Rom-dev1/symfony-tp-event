@@ -22,6 +22,7 @@ class AppFixtures extends Fixture
             $endDate = $startDate->modify('+1day');
             $event = new Event();
             $event->setName('Concert '.$i);
+            $event->setDescription('lorem ipsum');
             $event->setPrice(rand(1000, 5000));
             $event->setCreatedAt($newDate);
             $event->setStartEvent($startDate);
