@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Event;
 use App\Form\EventType;
 use App\Repository\EventRepository;
+use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,9 +47,10 @@ class EventController extends AbstractController
     #[Route('/event', name: 'app_event')]
     public function listEvent(): Response
     {   
-
+        $date = date('now');
         return $this->render('event/index.html.twig', [
-            'events' => $this->repository->findAll()
+            'events' => $this->repository->findAll(),
+            'nbevent' => $this->repository->findAllToCome()
         ]);
     }
 

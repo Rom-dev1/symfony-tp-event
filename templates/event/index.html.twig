@@ -3,29 +3,36 @@
 {% block title %}Hello EventController!{% endblock %}
 
 {% block body %}
-{% for event in events %}
-    <div>
-        <h1>{{event.name}}</h1>
-        <p>{{event.description}}</p>
-        <p>
-            {{event.startEvent | date("d/m/Y")}} à {{event.startEvent | date("H")}}h{{event.startEvent | date("i")}} au {{event.endEvent | date("d/m/Y")}} à {{event.endEvent | date("H")}}h{{event.endEvent | date("i")}}
-        </p>
+    <h1 class="text-center text-xl">{{nbevent | length}} événements à venir</h1>
+    <div class="grid grid-cols-4 gap-4">
+        {% for event in events %}
+        <div class="border-2 border-gray-200 p-4 mt-8 shadow-xl rounded text-lg mx-4">
+            <div class="mb-3">
+                <h1 class="text-3xl font-semibold">{{event.name}}</h1>
+                <p>{{event.description}}</p>
+                <p>
+                    Du {{event.startEvent | date("d/m/Y")}} à {{event.startEvent | date("H")}}h{{event.startEvent | date("i")}} au 
+                </p> 
+                <p>
+                    {{event.endEvent | date("d/m/Y")}} à {{event.endEvent | date("H")}}h{{event.endEvent | date("i")}}
+                </p>
 
-    </div>
-    <div>
-        <a href="{{path('app_event_one', {id: event.id})}}">Voir</a>
-        {% if event.startEvent < date('now') %}
-            <span>Passé</span>
-        {% endif %}
-        {% if event.startEvent == date('now') %}
-            <span>En cours</span>
-        {% endif %}
-        {% if event.startEvent > date('now') %}
-            <span>A venir</span>
-        {% endif %}
+            </div>
+            <div>
+                <a class="bg-blue-500 text-white p-2 rounded" href="{{path('app_event_one', {id: event.id})}}">Voir</a>
+                {% if event.startEvent < date('now') %}
+                    <span class="bg-red-500 text-white px-1 rounded">Passé</span>
+                {% endif %}
+                {% if event.startEvent == date('now') %}
+                    <span>En cours</span>
+                {% endif %}
+                {% if event.startEvent > date('now') %}
+                    <span class="bg-green-500 text-white px-1 rounded">A venir</span>
+                {% endif %}
+            </div>
+        </div>    
+        {% endfor %}
     </div>
     
-
-{% endfor %}
 
 {% endblock %}

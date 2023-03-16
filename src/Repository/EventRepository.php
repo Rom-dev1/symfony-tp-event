@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Event;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +38,14 @@ class EventRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+    public function findAllToCome()
+    {
+        $queryBuilder = $this->createQueryBuilder('e')
+            ->where('e.startEvent > :date')
+            ->setParameter('date', new DateTime())
+            ->getQuery();
+        return $queryBuilder->getResult();
     }
 
 //    /**
