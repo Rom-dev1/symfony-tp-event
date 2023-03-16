@@ -13,7 +13,7 @@
 
     </div>
     <div>
-        <button>Voir</button>
+        <a href="{{path('app_event_one', {id: event.id})}}">Voir</a>
         {% if event.startEvent < date('now') %}
             <span>Passé</span>
         {% endif %}
@@ -23,8 +23,6 @@
         {% if event.startEvent > date('now') %}
             <span>A venir</span>
         {% endif %}
-        
-        
     </div>
     
 

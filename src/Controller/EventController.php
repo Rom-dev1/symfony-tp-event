@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EventController extends AbstractController
 {   
     protected $repository;
+
     public function __construct(EventRepository $repository)
     {
         $this->repository = $repository;
@@ -21,6 +22,16 @@ class EventController extends AbstractController
 
         return $this->render('event/index.html.twig', [
             'events' => $this->repository->findAll()
+        ]);
+    }
+
+    #[Route('event/{id}', name:'app_event_one')]
+    public function show($id)
+    {
+        $event = $this->repository->find($id);
+
+        return $this->render('event/show.html.twig', [
+            'event' => $event
         ]);
     }
 }
