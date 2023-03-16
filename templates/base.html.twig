@@ -12,7 +12,7 @@
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
-            <script src="{{asset('build/app.js')}}" defer></script>
+            <script src="{{ asset('app.js') }}" defer></script>
         {% endblock %}
     </head>
     <body>
@@ -43,7 +43,7 @@
         </form>
         {% for label, messages in app.flashes %}
             {% for message in messages %}
-                <div id="flash-messages" class="bg-slate-200 rounded w-1/4 mx-auto text-center p-6 mb-[100px]">
+                <div id="flash-messages" class="flash-messages bg-slate-200 rounded w-1/4 mx-auto text-center p-6 mb-[100px]">
                     {{ message }}
                 </div>
             {% endfor %}

@@ -24,7 +24,7 @@ class GoEventController extends AbstractController
                 $contact = $form->getData();
                 $entityManager->persist($contact);
                 $entityManager->flush();
-
+                $this->addFlash('sucess', 'Votre mail à bien été envoyé');
                 $email = (new Email())
                 ->from('hello@example.com')
                 ->to('you@example.com')
