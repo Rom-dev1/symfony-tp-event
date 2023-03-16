@@ -7,6 +7,7 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            <script src="https://cdn.tailwindcss.com/?plugins=forms"></script>
         {% endblock %}
 
         {% block javascripts %}
@@ -14,6 +15,26 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            <div class="bg-gray-200 py-4">
+                <div class="w-4/5 mx-auto flex justify-between items-center">
+                    <div>
+                        <h1 class="font-bold text-2xl">Event Time</h1>
+                    </div>
+                    <div>
+                        <nav>
+                            <ul class="space-x-4 text-lg">
+                                <a href="{{path('app_home')}}">Accueil</a>
+                                <a href="{{path('app_event')}}">Evènements</a>
+                                <a href="{{path('app_event_create')}}">Créer un évènement</a>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="w-4/5 mx-auto">
+            {% block body %}{% endblock %}
+        </div>
     </body>
 </html>
