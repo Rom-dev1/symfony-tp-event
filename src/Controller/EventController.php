@@ -70,6 +70,11 @@ class EventController extends AbstractController
         ]);
     }
 
+    public function get(Request $request)
+    {   
+        $search = $request->get('search');
+        dump($search);
+    }
     
 
 }
