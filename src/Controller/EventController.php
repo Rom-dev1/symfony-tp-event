@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Event;
 use App\Form\EventType;
 use App\Repository\EventRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +28,8 @@ class EventController extends AbstractController
     {
         $event = new Event();
         $event->setCreatedAt(new \DateTimeImmutable());
+        $event->setStartEvent(new \DateTimeImmutable());
+        $event->setEndEvent(new DateTimeImmutable());
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
