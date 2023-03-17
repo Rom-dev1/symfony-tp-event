@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Event;
-use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -43,9 +42,20 @@ class EventRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('e')
             ->where('e.startEvent > :date')
-            ->setParameter('date', new DateTime())
+            ->setParameter('date', new \DateTime())
             ->getQuery();
         return $queryBuilder->getResult();
+    }
+
+    public function findBySearch($searchName)
+    {
+        $queryBuilder = $this->createQueryBuilder('e')
+            ->where('e.name LIKE :search')
+            ->setParameter('search', '%'.$searchName.'%')
+            ->getQuery();
+        return $queryBuilder->getResult();
+        
+        
     }
 
 //    /**
