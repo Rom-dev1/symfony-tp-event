@@ -27,6 +27,7 @@ class EventController extends AbstractController
     public function create(Request $request)
     {
         $event = new Event();
+        dump($event);
         $event->setCreatedAt(new \DateTimeImmutable());
         $event->setStartEvent(new \DateTimeImmutable());
         $event->setEndEvent(new DateTimeImmutable());
