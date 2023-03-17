@@ -14,14 +14,12 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(Request $request)
     {   
-        $searchBar = new SearchData($request);
-        dump($searchBar);
+        $searchBar = new SearchData();
         $form = $this->createForm(SearchType::class, $searchBar);
-        dump($form);
         $form->handleRequest($request);
-        dump($form);
         if($form->isSubmitted() && $form->isValid()){
             dump($searchBar);
+            dump($request);
         }
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',

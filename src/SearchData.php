@@ -4,17 +4,7 @@ namespace App;
 
 class SearchData
 {
-    private ?string $searchBar ;
-
-    public function __construct($searchBar)
-    {
-        $this->searchBar = $searchBar;
-    }
-
-    public function __toString()
-    {
-        return $this->searchBar;
-    }
+    private string $searchBar = "" ;
 
     public function getSearchBar(): ?string
     {   
