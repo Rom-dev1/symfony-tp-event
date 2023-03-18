@@ -26,11 +26,14 @@ class HomeController extends AbstractController
             // dump($search);
             empty($form);
 
+            return $this->render('home/search.html.twig', [
+                'search' => $newSearch
+            ]);
+
         }
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'form' => $form,
-            'search' => $newSearch
         ]);
     }
 }
