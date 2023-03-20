@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="grid grid-cols-4 gap-4">
+        {% for search in searchs %}
+        <div class="border-2 border-gray-200 p-4 mt-8 shadow-xl rounded text-lg mx-4">
+            <div class="mb-3">
+                <h1 class="text-3xl font-semibold">{{search.name}}</h1>
+                <p>{{search.description}}</p>
+                <p>
+                    Du {{search.startEvent | date("d/m/Y")}} à {{search.startEvent | date("H")}}h{{search.startEvent | date("i")}} au 
+                </p> 
+                <p>
+                    {{search.endEvent | date("d/m/Y")}} à {{search.endEvent | date("H")}}h{{search.endEvent | date("i")}}
+                </p>
+            </div>
+            <div>
+                <a class="bg-blue-500 text-white p-2 rounded" href="{{path('app_event_one', {id: search.id})}}">Voir</a>
+                {% if search.startEvent < date('now') %}
+                    <span class="bg-red-500 text-white px-1 rounded">Passé</span>
+                {% endif %}
+                {% if search.startEvent == date('now') %}
+                    <span>En cours</span>
+                {% endif %}
+                {% if search.startEvent > date('now') %}
+                    <span class="bg-green-500 text-white px-1 rounded">A venir</span>
+                {% endif %}
+            </div>
+        </div>    
+        {% endfor %}
+    </div>
+{% endblock %}
