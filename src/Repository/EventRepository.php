@@ -50,11 +50,13 @@ class EventRepository extends ServiceEntityRepository
     public function findBySearch($searchName)
     {
         $queryBuilder = $this->createQueryBuilder('e')
-            ->where('e.name LIKE :search')
+            ->where('e.name LIKE :search') // requete préparer car :search est tapé par l'utilisateur
             ->setParameter('search', '%'.$searchName.'%')
             ->getQuery();
         return $queryBuilder->getResult();
         
+        // @todo ajouter le offset (setFirstResult) et offlimit (setMaxResult) dans la doctrine 
+        // pour savoir le offset ($page - 1) * le nombre d'élément à afficher
         
     }
 

@@ -7,7 +7,6 @@ use App\Repository\EventRepository;
 use App\SearchData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SearchController extends AbstractController
@@ -22,7 +21,6 @@ class SearchController extends AbstractController
             dump($search);
             dump($request);
             $newSearch = $eventRepository->findBySearch($search);
-            // dump($search);
             empty($form);
 
             return $this->render('search/search.html.twig', [

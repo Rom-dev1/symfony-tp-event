@@ -27,6 +27,7 @@ class EventController extends AbstractController
     public function create(Request $request)
     {   
         $event = new Event();
+        // @todo 
         // modifier date de création pour avoir la date du jour 
         // générer automatiquement la création de l'evenement
         $event->setCreatedAt(new \DateTimeImmutable());
@@ -49,9 +50,13 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/event', name: 'app_event')]
+    #[Route('/events', name: 'app_event')]
+    //@todo pagination, ajouter le requirement avec le digit dans les parametres de la route
+    // faire requete dans le repository
+    // possibilié d'utiliser un bundle ou de le faire à la main
     public function listEvent(): Response
     {   
+        // @todo faire order by
         return $this->render('event/index.html.twig', [
             'events' => $this->repository->findAll(),
             'nbevent' => $this->repository->findAllToCome()
