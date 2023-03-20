@@ -20,7 +20,7 @@ class EventType extends AbstractType
             ->add('createdAt')
             ->add('startEvent')
             ->add('endEvent')
-            ->add('cover')
+            ->add('cover') // @todo voir doc upload, remplacer ce champ, les validations vont etre insérés ici
             ->add('description')
         ;
     }
