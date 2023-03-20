@@ -15,7 +15,7 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            ->add('name', )
             ->add('price')
             ->add('createdAt')
             ->add('startEvent')
@@ -24,6 +24,9 @@ class EventType extends AbstractType
             ->add('description')
         ;
     }
+
+    //@todo faire un tableau ppur débuter selection de date a partir de 2023
+    //@todo faire le moneytype, modifier le range dans eventype validate, et personnalisé le message  
 
     public function configureOptions(OptionsResolver $resolver): void
     {

@@ -25,9 +25,10 @@ class EventController extends AbstractController
 
     #[Route('event/create', name:'app_event_create')]
     public function create(Request $request)
-    {
+    {   
         $event = new Event();
-        dump($event);
+        // modifier date de création pour avoir la date du jour 
+        // générer automatiquement la création de l'evenement
         $event->setCreatedAt(new \DateTimeImmutable());
         $event->setStartEvent(new \DateTimeImmutable());
         $event->setEndEvent(new DateTimeImmutable());
@@ -35,6 +36,7 @@ class EventController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            // $event->setCreatedAt(new \DateTImeImmutable)
             $this->entityManager->persist($event);
             $this->entityManager->flush();
             $this->addFlash('success','Votre événement à été créer, merci!');
