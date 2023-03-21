@@ -15,7 +15,9 @@ class SearchController extends AbstractController
     public function index(Request $request, EventRepository $eventRepository)
     {
         $search = new SearchData();
-        $form = $this->createForm(SearchType::class, $search);
+        $form = $this->createForm(SearchType::class, $search, [
+            'action' => $this->generateUrl('app_search')
+        ]);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             dump($search);

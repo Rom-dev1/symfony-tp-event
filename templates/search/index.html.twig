@@ -1,11 +1,10 @@
 
-{% block title %}Hello SearchController!{% endblock %}
 
 {% block body %}
     {# ajouter une action au form #}
       {{form_start(form, {'attr': {'class': 'block text-center mt-8'}})}}
         {{form_widget(form.searchBar, {'attr': {'class': 'w-1/4 border-2'}})}}
-        <a href="{{path('app_search')}}" class="bg-gray-600 text-white p-2 rounded">Rechercher</a>
+        <button>Rechercher</button>
     {{form_end(form)}} 
   
 {% endblock %}
