@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\SearchType;
 use App\Repository\EventRepository;
 use App\SearchData;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,13 +21,19 @@ class SearchController extends AbstractController
         ]);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-            dump($search);
-            dump($request);
             $newSearch = $eventRepository->findBySearch($search);
-            empty($form);
-
+            $nbEvent = [];
+            foreach($newSearch as $new){
+                if($new->getStartEvent() > new DateTimeImmutable()){
+                    $nbEvent[] = $new;
+                }
+            }
+            
             return $this->render('search/search.html.twig', [
-                'searchs' => $newSearch
+                'searchs' => $newSearch,
+                'form' => $form,
+                'nbEvent' => $nbEvent
+                
             ]);
 
         }

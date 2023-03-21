@@ -1,6 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+    {{form_start(form, {'attr': {'class': 'block text-center my-[50px]'}})}}
+        {{form_widget(form.searchBar, {'attr': {'class': 'w-1/4 border-2'}})}}
+        <button class="bg-gray-600 w-fit rounded-lg text-white p-2 mt-12 hover:bg-gray-700">Rechercher</button>
+    {{form_end(form)}}
+     <h1 class="text-center text-2xl text-gray-600 drop-shadow-lg mt-10"> {{nbEvent | length}} événements à venir</h1> 
     <div class="grid grid-cols-4 gap-4">
         {% for search in searchs %}
         <div class="border-2 border-gray-200 p-4 mt-8 shadow-xl rounded text-lg mx-4">

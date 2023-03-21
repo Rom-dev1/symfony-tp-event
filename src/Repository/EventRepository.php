@@ -51,6 +51,7 @@ class EventRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('e')
             ->where('e.name LIKE :search') // requete préparer car :search est tapé par l'utilisateur
+            ->orderBy('e.startEvent', 'DESC')
             ->setParameter('search', '%'.$searchName.'%')
             ->getQuery();
         return $queryBuilder->getResult();
