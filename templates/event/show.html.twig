@@ -11,7 +11,15 @@
     </div>
     <div class="flex items-center space-x-4">
         <p>Alors si t'es motivé, clique!</p>
-        <a class="bg-gray-600 rounded p-3 text-white hover:bg-gray-700" href="{{path('app_go_event')}}">Rejoindre l'évenement</a>
+        {% if lock > date('now') %}
+            <a class="bg-gray-600 rounded p-3 text-white hover:bg-gray-700" href="{{path('app_go_event')}}">Rejoindre l'évenement</a>
+        {% endif %}
+        {% if lock < date('now') %}
+            <span>Désolé, cet événement est fini</span>
+        {% endif %}
+        
+        
+        
     </div>
 </div>
     

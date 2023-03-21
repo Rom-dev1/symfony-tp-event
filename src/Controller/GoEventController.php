@@ -35,14 +35,11 @@ class GoEventController extends AbstractController
                 //->subject('Time for Symfony Mailer!')
                 // ->text('Sending emails is fun again!')
                 ->html('<p>See Twig integration for better HTML integration!</p>');
-                dump($email);
                 $mailer->send($email);
-                dump($mailer);
                 return $this->redirectToRoute('app_event');
             }
 
         return $this->render('go_event/email.html.twig', [
-            'controller_name' => 'GoEventController',
             'form' => $form
         ]);
     }

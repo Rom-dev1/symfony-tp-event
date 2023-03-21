@@ -56,7 +56,6 @@ class EventController extends AbstractController
     // possibilié d'utiliser un bundle ou de le faire à la main
     public function listEvent(): Response
     {   
-        // @todo faire order by
         return $this->render('event/index.html.twig', [
             'events' => $this->repository->findAll(),
             'nbevent' => $this->repository->findAllToCome()
@@ -68,13 +67,16 @@ class EventController extends AbstractController
     public function show($id)
     {
         $event = $this->repository->find($id);
+        $lock = $event->getEndEvent();
+        dump($lock);
 
         if(!$event){
             throw $this->createNotFoundException();
         }
 
         return $this->render('event/show.html.twig', [
-            'event' => $event
+            'event' => $event,
+            'lock' => $lock
         ]);
     }
 

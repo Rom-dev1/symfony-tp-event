@@ -1,12 +1,15 @@
-
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello HomeController!
+{% endblock %}
 
 {% block body %}
-    <h1 class="text-center font-semibold text-6xl">Bienvenue sur Event Time</h1>
-    <a href="{{path('app_event')}}" class="flex mx-auto bg-gray-600 w-fit rounded-lg text-white p-4 mt-12 hover:bg-gray-700">Voir la liste des évènements</a>
+	<div class="flex  flex-col justify-between max-h-full">
+		<h1 class="text-center font-semibold text-6xl">Bienvenue sur Event Time</h1>
+		<a href="{{path('app_event')}}" class="flex mx-auto bg-gray-600 w-fit rounded-lg text-white p-4 mt-12 hover:bg-gray-700">Voir la liste des évènements</a>
 
-    {{render(controller('App\\Controller\\SearchController::index'))}}
+		{{render(controller('App\\Controller\\SearchController::index'))}}
+	</div>
+
 
 {% endblock %}

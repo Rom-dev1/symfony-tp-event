@@ -36,7 +36,7 @@
         </header>
         {% for label, messages in app.flashes %}
             {% for message in messages %}
-                <div id="flash-messages" class="flash-messages bg-slate-200 rounded w-1/4 mx-auto text-center p-6 mb-[100px]">
+                <div id="flash-messages" class="flash-messages bg-slate-200 rounded w-1/4 mx-auto mt-[100px] text-center p-6 mb-[100px]">
                     {{ message }}
                 </div>
             {% endfor %}
@@ -44,5 +44,10 @@
         <div class="w-4/5 mx-auto my-8">
             {% block body %}{% endblock %}
         </div>
+        <footer>
+            <div class="bg-gray-200 mx-auto py-8 w-full">
+                <p class="text-center text-sm">Copyright {{ 'now' | date('Y') }} Event Time.</p>
+            </div>
+        </footer>
     </body>
 </html>

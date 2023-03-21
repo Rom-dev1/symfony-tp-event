@@ -3,7 +3,7 @@
 {% block title %}Hello EventController!{% endblock %}
 
 {% block body %}
-    <h1 class="text-center text-xl">{{nbevent | length}} événements à venir</h1>
+    <h1 class="text-center text-2xl text-gray-600 my-[100px]">{{nbevent | length}} événements à venir</h1>
     <div class="grid grid-cols-4 gap-4">
         {% for event in events %}
         <div class="border-2 border-gray-200 p-4 mt-8 shadow-xl rounded text-lg mx-4">
@@ -23,7 +23,7 @@
                     <span class="bg-red-500 text-white px-1 rounded">Passé</span>
                 {% endif %}
                 {% if event.startEvent == date('now') %}
-                    <span>En cours</span>
+                    <span class="bg-yellow-500 text-white px-1 rounded">En cours</span>
                 {% endif %}
                 {% if event.startEvent > date('now') %}
                     <span class="bg-green-500 text-white px-1 rounded">A venir</span>
