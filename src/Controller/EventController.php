@@ -38,6 +38,8 @@ class EventController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             // $event->setCreatedAt(new \DateTImeImmutable)
+            $coverFile = $form->get('cover')->getData();
+            dump($coverFile);
             $this->entityManager->persist($event);
             $this->entityManager->flush();
             $this->addFlash('success','Votre événement à été créer, merci!');

@@ -3,12 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Event;
-use DateTime;
-use DateTimeImmutable;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class EventType extends AbstractType
 {
@@ -20,7 +19,20 @@ class EventType extends AbstractType
             ->add('createdAt')
             ->add('startEvent')
             ->add('endEvent')
-            ->add('cover') // @todo voir doc upload, remplacer ce champ, les validations vont etre insérés ici
+            ->add('cover', FileType::class, [
+                'label' => 'Image',
+                'mapped' => 'false',
+                'required' => 'false',
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/jpg'
+                        ]
+                    ])
+                ]
+            ]) // @todo voir doc upload, remplacer ce champ, les validations vont etre insérés ici
             ->add('description')
         ;
     }
