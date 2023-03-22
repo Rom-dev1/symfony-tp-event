@@ -46,6 +46,7 @@ class EventController extends AbstractController
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFileName = $safeFilename.'-'.uniqid().'.'.$coverFile->guessExtension();
                 $coverFile->move($this->getParameter('cover_directory'), $newFileName);
+                $event->setCover($newFileName);
             }
             $this->entityManager->persist($event);
             $this->entityManager->flush();
