@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class EventController extends AbstractController
 {   
@@ -24,7 +25,7 @@ class EventController extends AbstractController
     }
 
     #[Route('event/create', name:'app_event_create')]
-    public function create(Request $request)
+    public function create(Request $request,SluggerInterface $slugger)
     {   
         $event = new Event();
         // @todo 
@@ -40,6 +41,12 @@ class EventController extends AbstractController
             // $event->setCreatedAt(new \DateTImeImmutable)
             $coverFile = $form->get('cover')->getData();
             dump($coverFile);
+            if($coverFile){
+                $originalFilename = pathinfo($coverFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFileName = $safeFilename.'-'.uniqid().'.'.$coverFile->guessExtension();
+                $coverFile->move($this->getParameter('cover_directory'), $newFileName);
+            }
             $this->entityManager->persist($event);
             $this->entityManager->flush();
             $this->addFlash('success','Votre événement à été créer, merci!');

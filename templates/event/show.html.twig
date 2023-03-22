@@ -5,6 +5,7 @@
     <div>
         <h1 class="text-3xl">{{event.name}}</h1>
         <p>{{event.description}}</p>
+        <img class="w-[200px] h-[200px]" src="{{ asset('uploads/cover/' ~ event.cover) }}" alt="">
     </div>
     <div>
         <p>Cet événenemt débute le {{event.startEvent | date('d-m-Y')}} à {{event.startEvent | date('H:i')}}</p>
