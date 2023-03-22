@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class EventController extends AbstractController
@@ -74,6 +75,7 @@ class EventController extends AbstractController
 
 
     #[Route('event/{id}', name:'app_event_one')]
+    #[IsGranted('ROLE_USER')]
     public function show($id)
     {
         $event = $this->repository->find($id);
